@@ -1,4 +1,5 @@
 🚀 Ejercicio de Capacitación: Asistente Inteligente de Soporte Técnico
+
 📝 Contexto del Problema (La Problemática)
 
 Imagina que trabajas para una empresa de software que vende un producto muy popular.
