@@ -51,12 +51,6 @@ Este será el contexto que la IA usará para generar respuestas.
 
 Ejemplo:
 
---- Base de Conocimiento Interna ---
-1. Reseteo de Contraseña: El usuario debe ir a 'Configuración > Cuenta > Olvidé mi contraseña' y seguir los pasos. El enlace de reseteo se enviará a su correo.
-2. Problema de Arranque: Si el software no inicia, puede deberse a un antivirus bloqueando la aplicación o una instalación corrupta. Se recomienda desactivar temporalmente el antivirus o reinstalar el programa.
-3. Requisitos del Sistema: Se necesita Windows 10 o superior, 8 GB de RAM y 5 GB de espacio libre en disco.
---- Fin de la Base de Conocimiento ---
-
 3. Crear la Cadena (Chain) de LangChain
 
 Tu asistente debe seguir este flujo básico:
