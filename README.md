@@ -1,447 +1,153 @@
 🚀 Ejercicio de Capacitación: Asistente Inteligente de Soporte Técnico
+📝 Contexto del Problema (La Problemática)
 
-Contexto del Problema (La Problemática) 📝
+Imagina que trabajas para una empresa de software que vende un producto muy popular.
+El equipo de soporte técnico recibe cientos de correos electrónicos y tickets de usuarios todos los días con preguntas, problemas y dudas.
 
-Imagina que trabajas para una empresa de software que vende un producto muy popular. El equipo de soporte técnico recibe cientos de correos electrónicos y tickets de usuarios todos los días con preguntas, problemas y dudas.
+El problema es que muchos de estos tickets son repetitivos y consumen mucho tiempo del equipo, el cual podría enfocarse en resolver casos más complejos.
+Por ello, la gerencia ha decidido implementar una primera línea de atención automatizada con IA para responder las preguntas más frecuentes.
 
-El problema es que muchos de estos tickets son repetitivos y consumen mucho tiempo del equipo, que podría estar resolviendo problemas más complejos. La gerencia ha decidido implementar una primera línea de defensa con IA para automatizar las respuestas a las preguntas más frecuentes.
+🎯 Objetivo del Ejercicio
 
-Objetivo del Ejercicio 🎯
+Tu misión es desarrollar un script en Python que funcione como un “Asistente de Soporte Inteligente”.
+El asistente deberá recibir una pregunta de un usuario sobre un problema técnico y, usando un contexto predefinido (una base de conocimiento simulada), generar una respuesta útil, coherente y amigable.
 
-Tu misión es desarrollar un script en Python que actúe como un "Asistente de Soporte Inteligente". Este script debe ser capaz de recibir una pregunta de un usuario sobre un problema técnico y, utilizando un contexto predefinido (un pequeño manual o base de conocimiento), generar una respuesta útil y amigable para el usuario.
+El asistente deberá responder correctamente preguntas como:
 
-El objetivo es que el asistente pueda responder preguntas como:
+“¿Cómo puedo resetear mi contraseña?”
 
-    "¿Cómo puedo resetear mi contraseña?"
+“Mi programa no abre, ¿qué hago?”
 
-    "Mi programa no abre, ¿qué hago?"
+“¿Cuáles son los requisitos del sistema para instalar el software?”
 
-    "¿Cuáles son los requisitos del sistema para instalar el software?"
+🛠️ Herramientas y Librerías Requeridas
 
-Herramientas y Librerías Requeridas 🛠️
+Para completar este ejercicio, deberás usar las siguientes herramientas:
 
-Para este ejercicio, deberás utilizar las siguientes herramientas:
-
-    Python
-
-    LangChain: Para orquestar el flujo de la información (pregunta -> prompt -> modelo -> respuesta).
-
-    LangChain Google Vertex AI: Para conectar con el modelo de IA de Gemini.
-
-Requisitos y Pasos a Seguir 👣
-
-No necesitas crear una interfaz gráfica. Todo el ejercicio se desarrollará en la terminal.
-
-    Configuración del Entorno:
-
-        Asegúrate de tener Python instalado.
-
-        Instala las librerías necesarias: pip install langchain langchain-google-vertexai.
-
-        Autenticación: No necesitas manejar archivos .env ni claves dentro del código. Se asume que tus credenciales de Google Cloud ya están configuradas como una variable de entorno en tu sistema, por lo que la autenticación será automática.
-
-    Definir la Base de Conocimiento:
-
-        Dentro de tu script de Python, crea una variable de texto (un string multi-línea) que simule ser un pequeño manual de usuario o una sección de "Preguntas Frecuentes". Este será el contexto que la IA usará para encontrar las respuestas.
-
-        Ejemplo de contexto:
-
-        --- Base de Conocimiento Interna ---
-        1. Reseteo de Contraseña: El usuario debe ir a 'Configuración > Cuenta > Olvidé mi contraseña' y seguir los pasos. El enlace de reseteo se enviará a su correo.
-        2. Problema de Arranque: Si el software no inicia, las causas comunes son: un antivirus bloqueando la aplicación o una instalación corrupta. La solución es desactivar temporalmente el antivirus o reinstalar el programa.
-        3. Requisitos del Sistema: Se necesita Windows 10 o superior, 8 GB de RAM y 5 GB de espacio en disco.
-        --- Fin de la Base de Conocimiento ---
-
-    Crear la Cadena (Chain) de LangChain:
-
-        Cargar el Modelo: Inicializa el modelo ChatVertexAI para conectar con Gemini.
-
-        Crear el Prompt Template: Diseña una plantilla de prompt que le dé instrucciones claras al modelo. El prompt debe incluir dos variables de entrada: el contexto (tu base de conocimiento) y la pregunta del usuario.
-
-            Pista: El prompt debería decirle a Gemini algo como: "Eres un asistente de soporte técnico. Responde la pregunta del usuario basándote únicamente en el siguiente contexto. Si la respuesta no está en el contexto, indica que no tienes esa información."
-
-        Construir la Cadena: Une el prompt, el modelo y un StrOutputParser para que la salida sea un texto limpio.
-
-    Probar el Asistente:
-
-        Define una variable con una pregunta de ejemplo (ej. "No me acuerdo de mi clave, ¿qué puedo hacer?").
-
-        Invoca tu cadena de LangChain pasándole tanto la base de conocimiento como la pregunta del usuario.
-
-        Imprime en la consola la respuesta generada por Gemini.
-
-        Realiza pruebas con diferentes preguntas, incluyendo algunas cuyas respuestas no estén en la base de conocimiento para ver cómo reacciona el asistente.
-
- División Proyecto Java N-Capas
-Ideas de Ejercicios de Capacitación IA
-Mejora de Calidad de Foto
-Significado de "btw 19teen"
-Imagen Mejorada
-Foto Mejorada
-Conversación con Gemini
-
-necesito realizar un ejercicio sencillo de langchain con python ty con la ia de gemini, yo ya tenog mi clave json que me dio gcp con los servicios de vertex ia, mi clave json ya esta configurada como entorno de variable del sistema, dame un ejercicio super basico para desarrollar con langchain
-
-Claro, aquí tienes un ejercicio súper básico para empezar con LangChain y Gemini, asumiendo que ya tienes tu autenticación de GCP configurada correctamente en tu entorno.
-
-Este script simplemente tomará un tema (por ejemplo, "helado") y le pedirá a Gemini que sugiera un nombre divertido para una nueva marca. Es un "hola mundo" perfecto para probar que todo funcione.
-
-Ejercicio Básico: Generador de Nombres con LangChain y Gemini
-
-Este código utiliza los siguientes componentes de LangChain:
-
-    ChatVertexAI: Para conectar con el modelo de Gemini en Google Cloud Vertex AI.
-
-    ChatPromptTemplate: Para crear una plantilla de la pregunta que le haremos al modelo.
-
-    StrOutputParser: Para obtener la respuesta del modelo como un texto simple.
-
-1. Instalación de Librerías
-
-Primero, asegúrate de tener instaladas las librerías necesarias. Puedes hacerlo con pip:
-Bash
-
-pip install --upgrade langchain langchain-google-vertexai
-
-2. Código Python
-
-Crea un archivo llamado test_langchain.py y pega el siguiente código. Está comentado para que entiendas qué hace cada línea.
 Python
 
-# -*- coding: utf-8 -*-
+LangChain: Para orquestar el flujo de la información (pregunta → prompt → modelo → respuesta).
 
-# Importamos las clases necesarias de LangChain
-from langchain_google_vertexai import ChatVertexAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+LangChain Google Vertex AI: Para conectar tu cadena con el modelo Gemini de Google Cloud.
 
-# 1. Inicializamos el modelo de Gemini
-# LangChain se conectará a Vertex AI usando la autenticación
-# que ya tienes configurada en tu entorno.
-# "gemini-1.0-pro-001" es uno de los modelos disponibles.
-llm = ChatVertexAI(model_name="gemini-1.0-pro-001")
+👣 Requisitos y Pasos a Seguir
+1. Configuración del Entorno
 
-# 2. Creamos una plantilla para el prompt (la instrucción)
-# Usamos llaves {} para indicar dónde irá nuestra variable (el tema).
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "Eres un asistente creativo experto en nombrar marcas."),
-    ("user", "Sugiere un nombre divertido y corto para una nueva marca de {tema}.")
-])
+Asegúrate de tener Python instalado.
 
-# 3. Creamos un "parser" para el resultado
-# Esto nos asegura que la salida del modelo sea un texto simple (string).
-output_parser = StrOutputParser()
+Instala las librerías necesarias:
 
-# 4. Creamos la cadena (chain)
-# Aquí es donde unimos los componentes en el orden en que se ejecutarán:
-# Prompt -> Modelo LLM -> Parser de Salida
-chain = prompt | llm | output_parser
+pip install langchain langchain-google-vertexai
 
-# 5. Ejecutamos la cadena
-# La función "invoke" pasa la variable a nuestro prompt y ejecuta toda la cadena.
-# Puedes cambiar el valor de "tema" por lo que quieras.
-print("Ejecutando la cadena de LangChain...")
-response = chain.invoke({"tema": "helados de frutas"})
 
-# Imprimimos la respuesta obtenida
-print("\nRespuesta de Gemini:")
-print(response)
+No necesitas manejar archivos .env ni claves dentro del código.
+Se asume que tus credenciales de Google Cloud ya están configuradas correctamente como una variable de entorno del sistema.
 
-# --- Otro ejemplo ---
-print("\n--- Probando con otro tema ---")
-response_cafe = chain.invoke({"tema": "cafetería para programadores"})
-print("\nRespuesta de Gemini:")
-print(response_cafe)
+2. Definir la Base de Conocimiento
 
-3. Cómo Ejecutarlo
+Crea una variable en tu script (string multilínea) que contenga información técnica básica, como si fuera una sección de “Preguntas Frecuentes”.
+Este será el contexto que la IA usará para generar respuestas.
 
-    Guarda el código en un archivo llamado test_langchain.py.
+Ejemplo:
 
-    Abre una terminal o línea de comandos.
+--- Base de Conocimiento Interna ---
+1. Reseteo de Contraseña: El usuario debe ir a 'Configuración > Cuenta > Olvidé mi contraseña' y seguir los pasos. El enlace de reseteo se enviará a su correo.
+2. Problema de Arranque: Si el software no inicia, puede deberse a un antivirus bloqueando la aplicación o una instalación corrupta. Se recomienda desactivar temporalmente el antivirus o reinstalar el programa.
+3. Requisitos del Sistema: Se necesita Windows 10 o superior, 8 GB de RAM y 5 GB de espacio libre en disco.
+--- Fin de la Base de Conocimiento ---
 
-    Navega hasta la carpeta donde guardaste el archivo.
+3. Crear la Cadena (Chain) de LangChain
 
-    Ejecuta el script con el siguiente comando:
-    Bash
+Tu asistente debe seguir este flujo básico:
 
-    python test_langchain.py
+Cargar el Modelo:
+Inicializa ChatVertexAI para conectar con Gemini.
 
-Resultado Esperado
+Crear el Prompt Template:
+Define una plantilla de instrucciones para el modelo.
+El prompt debe contener dos variables:
 
-La salida en tu terminal debería ser algo similar a esto (los nombres exactos variarán cada vez que lo ejecutes):
+{contexto} (la base de conocimiento)
 
-Ejecutando la cadena de LangChain...
+{pregunta} (la consulta del usuario)
 
-Respuesta de Gemini:
-FruityPop
+💡 Pista:
+El prompt debe decirle al modelo algo como:
 
---- Probando con otro tema ---
+“Eres un asistente de soporte técnico. Responde la pregunta del usuario basándote únicamente en el siguiente contexto.
+Si la respuesta no está en el contexto, indica que no tienes esa información.”
 
-Respuesta de Gemini:
-CodeBrew
+Construir la Cadena:
+Une los componentes en orden:
 
-Este ejercicio te confirma que tu conexión con Vertex AI funciona y que puedes construir y ejecutar una cadena básica con LangChain. ¡A partir de aquí, puedes empezar a crear cadenas mucho más complejas!
+Prompt → Modelo (Gemini) → Output Parser
 
-solo quiero que me creees una problematica para crear un readme y que lo resuelvan mis capacitantes no me des codigo ni nada, solo dame el contexto, las librerias que deberian de usar que deberia de hacer y asi pues nada de codigo dame un redme para que mis capacitantes lo desarrollen
 
-Claro, aquí tienes una problemática y su correspondiente README para que tus capacitantes la desarrollen. Está diseñado para ser un desafío práctico y enfocado en un caso de uso real.
+Ejecutar la Cadena:
+Pasa tu base de conocimiento y una pregunta de ejemplo para obtener la respuesta.
 
-README.md
+4. Probar el Asistente
 
-🚀 Ejercicio de Capacitación: Asistente Inteligente de Soporte Técnico
+Crea una variable con una pregunta de prueba, por ejemplo:
+"No me acuerdo de mi clave, ¿qué puedo hacer?"
 
-Contexto del Problema (La Problemática) 📝
+Invoca tu cadena con esa pregunta y muestra la respuesta en la consola.
 
-Imagina que trabajas para una empresa de software que vende un producto muy popular. El equipo de soporte técnico recibe cientos de correos electrónicos y tickets de usuarios todos los días con preguntas, problemas y dudas.
+Prueba con diferentes preguntas, incluyendo una que no esté en el contexto, para comprobar cómo maneja el modelo esas situaciones.
 
-El problema es que muchos de estos tickets son repetitivos y consumen mucho tiempo del equipo, que podría estar resolviendo problemas más complejos. La gerencia ha decidido implementar una primera línea de defensa con IA para automatizar las respuestas a las preguntas más frecuentes.
+✅ Criterios de Éxito (¿Cuándo has terminado?)
 
-Objetivo del Ejercicio 🎯
+Tu ejercicio se considerará completo cuando el script:
 
-Tu misión es desarrollar un script en Python que actúe como un "Asistente de Soporte Inteligente". Este script debe ser capaz de recibir una pregunta de un usuario sobre un problema técnico y, utilizando un contexto predefinido (un pequeño manual o base de conocimiento), generar una respuesta útil y amigable para el usuario.
+Se ejecute sin errores.
 
-El objetivo es que el asistente pueda responder preguntas como:
+Responda correctamente a preguntas contenidas en la base de conocimiento.
 
-    "¿Cómo puedo resetear mi contraseña?"
+Sea capaz de responder con algo como “No tengo información sobre eso” cuando se le pregunte algo fuera del contexto.
 
-    "Mi programa no abre, ¿qué hago?"
+🧠 ¿Qué Hace LangChain en Este Proyecto?
 
-    "¿Cuáles son los requisitos del sistema para instalar el software?"
+LangChain actúa como el cerebro organizador del flujo entre el usuario y la IA.
+Su rol principal es orquestar los pasos de la interacción, asegurando que la información fluya de forma lógica y estructurada.
 
-Herramientas y Librerías Requeridas 🛠️
+🔹 Funciones de LangChain:
 
-Para este ejercicio, deberás utilizar las siguientes herramientas:
+Recibir los datos: La pregunta del usuario y la base de conocimiento.
 
-    Python
+Construir el prompt: Generar la instrucción final que se enviará al modelo.
 
-    LangChain: Para orquestar el flujo de la información (pregunta -> prompt -> modelo -> respuesta).
+Conectarse con Gemini: Usar el modelo de Vertex AI para generar la respuesta.
 
-    LangChain Google Vertex AI: Para conectar con el modelo de IA de Gemini.
+Procesar la salida: Limpiar el resultado y devolver solo la parte útil al usuario.
 
-Requisitos y Pasos a Seguir 👣
+En resumen, LangChain se encarga del flujo de datos, mientras que Gemini genera el contenido inteligente.
 
-No necesitas crear una interfaz gráfica. Todo el ejercicio se desarrollará en la terminal.
+📑 Estructura de Ejemplo Alternativa (Otro Caso de Uso)
+🧩 Proyecto: “Extractor Automático de Datos de Correos”
 
-    Configuración del Entorno:
+Objetivo:
+Analizar el texto de un correo de cliente y extraer:
 
-        Asegúrate de tener Python instalado.
+Nombre del cliente
 
-        Instala las librerías necesarias (langchain, langchain-google-vertexai).
+Número de pedido
 
-        Verifica que tu variable de entorno con la clave JSON de GCP esté configurada correctamente.
+Resumen del problema
 
-    Definir la Base de Conocimiento:
+Componentes sugeridos:
 
-        Dentro de tu script de Python, crea una variable de texto (un string multi-línea) que simule ser un pequeño manual de usuario o una sección de "Preguntas Frecuentes". Este será el contexto que la IA usará para encontrar las respuestas.
+PromptTemplate: Instrucción para extraer información estructurada.
 
-        Ejemplo de contexto:
+ChatVertexAI: Modelo Gemini que analiza el texto.
 
-        --- Base de Conocimiento Interna ---
-        1. Reseteo de Contraseña: El usuario debe ir a 'Configuración > Cuenta > Olvidé mi contraseña' y seguir los pasos. El enlace de reseteo se enviará a su correo.
-        2. Problema de Arranque: Si el software no inicia, las causas comunes son: un antivirus bloqueando la aplicación o una instalación corrupta. La solución es desactivar temporalmente el antivirus o reinstalar el programa.
-        3. Requisitos del Sistema: Se necesita Windows 10 o superior, 8 GB de RAM y 5 GB de espacio en disco.
-        --- Fin de la Base de Conocimiento ---
+JsonOutputParser: Convierte la respuesta del modelo en un objeto JSON.
 
-    Crear la Cadena (Chain) de LangChain:
+Flujo:
 
-        Cargar el Modelo: Inicializa el modelo ChatVertexAI para conectar con Gemini.
+Prompt → Modelo → Parser → Resultado estructurado
 
-        Crear el Prompt Template: Diseña una plantilla de prompt que le dé instrucciones claras al modelo. El prompt debe incluir dos variables de entrada: el contexto (tu base de conocimiento) y la pregunta del usuario.
 
-            Pista: El prompt debería decirle a Gemini algo como: "Eres un asistente de soporte técnico. Responde la pregunta del usuario basándote únicamente en el siguiente contexto. Si la respuesta no está en el contexto, indica que no tienes esa información."
-
-        Construir la Cadena: Une el prompt, el modelo y un StrOutputParser para que la salida sea un texto limpio.
-
-    Probar el Asistente:
-
-        Define una variable con una pregunta de ejemplo (ej. "No me acuerdo de mi clave, ¿qué puedo hacer?").
-
-        Invoca tu cadena de LangChain pasándole tanto la base de conocimiento como la pregunta del usuario.
-
-        Imprime en la consola la respuesta generada por Gemini.
-
-        Realiza pruebas con diferentes preguntas, incluyendo algunas cuyas respuestas no estén en la base de conocimiento para ver cómo reacciona el asistente.
-
-Criterios de Éxito (¿Cuándo has terminado?) ✅
-
-El ejercicio se considerará completado cuando tu script:
-
-    Se ejecute sin errores.
-
-    Pueda recibir una pregunta sobre un tema incluido en la base de conocimiento y genere una respuesta coherente y correcta.
-
-    Responda de forma adecuada (ej. "No tengo información sobre eso") cuando se le pregunta por algo que no está en el contexto.
-
-Reto Adicional (Opcional) ⭐
-
-Si terminas rápido, intenta modificar tu script para que, en lugar de tener una sola pregunta fija, se ejecute en un bucle while. De esta forma, el programa le pedirá al usuario que ingrese una pregunta, la procesará, dará la respuesta y luego volverá a pedir otra pregunta, creando una conversación interactiva en la terminal hasta que el usuario escriba "salir".
-
-modifica el readme, yo ya tengo mi clave json configurada como variabke de entorno del sistema no es necesario el env
-
-¡Entendido! He modificado el README para que sea más directo y elimine cualquier mención o duda sobre la configuración de las credenciales, asumiendo que ya están listas en el sistema de tus capacitantes.
-
-Aquí está la versión actualizada:
-
-README.md
-
-🚀 Ejercicio de Capacitación: Asistente Inteligente de Soporte Técnico
-
-Contexto del Problema (La Problemática) 📝
-
-Imagina que trabajas para una empresa de software que vende un producto muy popular. El equipo de soporte técnico recibe cientos de correos electrónicos y tickets de usuarios todos los días con preguntas, problemas y dudas.
-
-El problema es que muchos de estos tickets son repetitivos y consumen mucho tiempo del equipo, que podría estar resolviendo problemas más complejos. La gerencia ha decidido implementar una primera línea de defensa con IA para automatizar las respuestas a las preguntas más frecuentes.
-
-Objetivo del Ejercicio 🎯
-
-Tu misión es desarrollar un script en Python que actúe como un "Asistente de Soporte Inteligente". Este script debe ser capaz de recibir una pregunta de un usuario sobre un problema técnico y, utilizando un contexto predefinido (un pequeño manual o base de conocimiento), generar una respuesta útil y amigable para el usuario.
-
-El objetivo es que el asistente pueda responder preguntas como:
-
-    "¿Cómo puedo resetear mi contraseña?"
-
-    "Mi programa no abre, ¿qué hago?"
-
-    "¿Cuáles son los requisitos del sistema para instalar el software?"
-
-Herramientas y Librerías Requeridas 🛠️
-
-Para este ejercicio, deberás utilizar las siguientes herramientas:
-
-    Python
-
-    LangChain: Para orquestar el flujo de la información (pregunta -> prompt -> modelo -> respuesta).
-
-    LangChain Google Vertex AI: Para conectar con el modelo de IA de Gemini.
-
-Requisitos y Pasos a Seguir 👣
-
-No necesitas crear una interfaz gráfica. Todo el ejercicio se desarrollará en la terminal.
-
-    Configuración del Entorno:
-
-        Asegúrate de tener Python instalado.
-
-        Instala las librerías necesarias: pip install langchain langchain-google-vertexai.
-
-        Autenticación: No necesitas manejar archivos .env ni claves dentro del código. Se asume que tus credenciales de Google Cloud ya están configuradas como una variable de entorno en tu sistema, por lo que la autenticación será automática.
-
-    Definir la Base de Conocimiento:
-
-        Dentro de tu script de Python, crea una variable de texto (un string multi-línea) que simule ser un pequeño manual de usuario o una sección de "Preguntas Frecuentes". Este será el contexto que la IA usará para encontrar las respuestas.
-
-        Ejemplo de contexto:
-
-        --- Base de Conocimiento Interna ---
-        1. Reseteo de Contraseña: El usuario debe ir a 'Configuración > Cuenta > Olvidé mi contraseña' y seguir los pasos. El enlace de reseteo se enviará a su correo.
-        2. Problema de Arranque: Si el software no inicia, las causas comunes son: un antivirus bloqueando la aplicación o una instalación corrupta. La solución es desactivar temporalmente el antivirus o reinstalar el programa.
-        3. Requisitos del Sistema: Se necesita Windows 10 o superior, 8 GB de RAM y 5 GB de espacio en disco.
-        --- Fin de la Base de Conocimiento ---
-
-    Crear la Cadena (Chain) de LangChain:
-
-        Cargar el Modelo: Inicializa el modelo ChatVertexAI para conectar con Gemini.
-
-        Crear el Prompt Template: Diseña una plantilla de prompt que le dé instrucciones claras al modelo. El prompt debe incluir dos variables de entrada: el contexto (tu base de conocimiento) y la pregunta del usuario.
-
-            Pista: El prompt debería decirle a Gemini algo como: "Eres un asistente de soporte técnico. Responde la pregunta del usuario basándote únicamente en el siguiente contexto. Si la respuesta no está en el contexto, indica que no tienes esa información."
-
-        Construir la Cadena: Une el prompt, el modelo y un StrOutputParser para que la salida sea un texto limpio.
-
-    Probar el Asistente:
-
-        Define una variable con una pregunta de ejemplo (ej. "No me acuerdo de mi clave, ¿qué puedo hacer?").
-
-        Invoca tu cadena de LangChain pasándole tanto la base de conocimiento como la pregunta del usuario.
-
-        Imprime en la consola la respuesta generada por Gemini.
-
-        Realiza pruebas con diferentes preguntas, incluyendo algunas cuyas respuestas no estén en la base de conocimiento para ver cómo reacciona el asistente.
-
-Criterios de Éxito (¿Cuándo has terminado?) ✅
-
-El ejercicio se considerará completado cuando tu script:
-
-    Se ejecute sin errores.
-
-    Pueda recibir una pregunta sobre un tema incluido en la base de conocimiento y genere una respuesta coherente y correcta.
-
-    Responda de forma adecuada (ej. "No tengo información sobre eso") cuando se le pregunta por algo que no está en el contexto.
-
-Reto Adicional (Opcional) ⭐
-
-Si terminas rápido, intenta modificar tu script para que, en lugar de tener una sola pregunta fija, se ejecute en un bucle while. De esta forma, el programa le pedirá al usuario que ingrese una pregunta, la procesará, dará la respuesta y luego volverá a pedir otra pregunta, creando una conversación interactiva en la terminal hasta que el usuario escriba "salir".
-
-dame un concepto de langchain y de lo que debe de hacer en este proyecto, mas una estrucutura de ejemplo de como debreria de ser sin que sea un ejemplo de este ejercicio
-
-¡Claro! Aquí tienes una explicación conceptual de LangChain, su rol en el ejercicio y una estructura de ejemplo para un proyecto diferente.
-
-¿Qué es LangChain? 🤔
-
-Piensa en LangChain como una caja de herramientas y un manual de instrucciones para construir aplicaciones con modelos de lenguaje (IA) como Gemini. No es la IA en sí misma, sino el pegamento y las piezas que te permiten conectar la IA con otras fuentes de datos y darle instrucciones de manera ordenada.
-
-Su objetivo es hacer que sea mucho más fácil realizar tareas complejas que van más allá de un simple "pregunta y respuesta". En lugar de que tengas que escribir código para cada pequeño paso (formatear la pregunta, llamar a la IA, procesar la respuesta), LangChain te da "bloques" pre-construidos para que los conectes.
-
-Los bloques más comunes son:
-
-    Models: La conexión directa con la IA (Gemini, en este caso).
-
-    Prompts: Plantillas para darle instrucciones a la IA de forma consistente.
-
-    Chains (Cadenas): La idea central de LangChain. Son secuencias de pasos. La cadena más simple es: Prompt -> Model -> Output.
-
-¿Qué Debe Hacer LangChain en Este Proyecto? 🧑‍🔧
-
-En el ejercicio del "Asistente de Soporte Inteligente", LangChain actúa como el director de orquesta. Su trabajo es asegurarse de que la información fluya correctamente en el orden correcto para obtener la respuesta que queremos.
-
-Específicamente, su rol es:
-
-    Tomar los Ingredientes: Recibe la pregunta del usuario ("¿Cómo reseteo mi clave?") y la base de conocimiento (el texto con las soluciones).
-
-    Preparar la Instrucción (Prompting): Usa la plantilla de prompt que creaste para mezclar los ingredientes en una instrucción clara para Gemini. El resultado es un texto final como: "Eres un asistente de soporte. Usando este contexto [aquí va la base de conocimiento], responde a esta pregunta: [aquí va la pregunta del usuario]".
-
-    Comunicarse con la IA: Envía esa instrucción finalizada al modelo de Gemini de forma estandarizada, sin que tengas que preocuparte por los detalles técnicos de la API.
-
-    Limpiar el Resultado: Recibe la respuesta completa de Gemini y, usando el StrOutputParser, la "limpia" para entregar únicamente el texto de la respuesta que le mostrarás al usuario.
-
-En resumen, LangChain orquesta el proceso para que tú solo te preocupes por definir el contexto y la pregunta, en lugar de programar cada paso de la interacción con la IA.
-
-Estructura de Ejemplo para Otro Proyecto (Extractor de Datos) 📑
-
-Imagina un proyecto diferente: quieres extraer información estructurada de un texto no estructurado, como un correo electrónico de un cliente.
-
-Objetivo: Leer un correo y extraer automáticamente el nombre del cliente, el número de pedido y el resumen del problema en un formato organizado (como un diccionario de Python).
-
-Una estructura de LangChain para este problema se vería así:
-
-    Entrada (Input):
-
-        Una variable de Python que contiene el texto completo del correo electrónico del cliente.
-
-    Componente 1: El Prompt Template (ChatPromptTemplate):
-
-        Sería una plantilla de instrucciones muy específica.
-
-        Instrucción: "Del siguiente texto, extrae el nombre del cliente, el número de pedido y un resumen del problema. Responde únicamente con un objeto JSON que tenga las claves nombre_cliente, numero_pedido y resumen."
-
-        Variables: La plantilla tendría una variable para insertar el {texto_del_correo}.
-
-    Componente 2: El Modelo (ChatVertexAI):
-
-        El motor de Gemini, que leerá el prompt y el correo, y entenderá que debe generar un texto con formato JSON.
-
-    Componente 3: El Parseador de Salida (JsonOutputParser):
-
-        Este es un bloque diferente al del ejercicio. En lugar de esperar un simple texto, este parser está diseñado para tomar la respuesta en formato JSON del modelo y convertirla automáticamente en un diccionario de Python que puedes usar en tu programa.
-
-    La Cadena (La Unión de los Componentes):
-
-        La cadena se construiría uniendo los bloques en este orden: prompt | model | json_parser
-
-    Salida (Output):
-
-        El resultado final no sería un texto, sino un diccionario de Python limpio y listo para usar, como este:
-        Python
+Salida esperada:
 
 {
   "nombre_cliente": "Ana García",
@@ -449,7 +155,3 @@ Una estructura de LangChain para este problema se vería así:
   "resumen": "El paquete llegó dañado y falta un artículo."
 }
 
-
-    Pueda recibir una pregunta sobre un tema incluido en la base de conocimiento y genere una respuesta coherente y correcta.
-
-    Responda de forma adecuada (ej. "No tengo información sobre eso") cuando se le pregunta por algo que no está en el contexto.
